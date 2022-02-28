@@ -13,7 +13,8 @@ Exemple: un pokémon avec ses types ou un jeu vidéo avec ses genres.
 
 L'URL pour obtenir un Pokemon à partir de son nom (contrainte pas d'ID donc on passe le nom en paramètre) est le suivant :
 
-``` http://127.0.0.1:8000/pokemon?name=Pikachu
+``` 
+http://127.0.0.1:8000/pokemon?name=Pikachu
 
 ```
 
@@ -25,19 +26,22 @@ Exemple: tous les pokémons avec leurs types ou tous les jeux vidéo avec leurs 
 
 * L'URL pour obtenir tous les pokemons :
 
-``` http://127.0.0.1:8000/pokemons
+``` 
+http://127.0.0.1:8000/pokemons
 
 ```
 
 * L'URL pour obtenir la liste des pokemons filtrée par type :
 
-``` http://127.0.0.1:8000/pokemons?type=Feu
+``` 
+http://127.0.0.1:8000/pokemons?type=Feu
 
 ```
 
 * L'URL pour obtenir la liste des pokemons filtrée par type et paginée :
 
-``` http://127.0.0.1:8000/pokemons?type=Feu&page=2
+``` 
+http://127.0.0.1:8000/pokemons?type=Feu&page=2
 
 ```
  
