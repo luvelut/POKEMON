@@ -19,15 +19,15 @@ class ApiController extends AbstractController
      */
     public function getAll(ManagerRegistry $doctrine)
     {
-        if(isset($_GET['type'])) $type = $_GET['type'];
-
         $em=$doctrine->getManager();
+        $datas = array();
 
-        if(!empty($type))
-        {
+        //Cas où la liste est filtrée par type
+        if(isset($_GET['type'])) {
+
+            $type = $_GET['type'];
             $ressourceType= $em->getRepository(Type::class)->findAll();
 
-            $datas = array();
             foreach ($ressourceType as $key => $ressource){
                 if($ressource->getLabel()===$type) {
                     $datas[$key]['name'] = $ressource->getLabel();
@@ -37,16 +37,17 @@ class ApiController extends AbstractController
                     }
                 };
             }
+
             if(empty($datas)) return new JsonResponse('Aucun pokemon de ce type dans notre base de donnees');
             if(isset($_GET['page'])) {
                 $datas=array_slice($datas[0]['pokemon'],0, $_GET['page']);
             }
-            return new JsonResponse($datas);
         }
+        //Cas où la liste n'est pas filtrée
         else {
+            
             $ressources= $em->getRepository(Pokemon::class)->findAll();
 
-            $datas = array();
             foreach ($ressources as $key => $ressource){
                 $datas[$key]['name'] = $ressource->getName();
                 $datas[$key]['description'] = $ressource->getDescription();
@@ -54,12 +55,14 @@ class ApiController extends AbstractController
                     $datas[$key]['type'][$type->getId()] = $type->getLabel();
                 }
             }
+
             if(empty($datas)) return new JsonResponse('Aucun pokemon dans notre base de donnees');
             if(isset($_GET['page'])) {
                 $datas=array_slice($datas[0]['pokemon'],0, $_GET['page']);
             }
-            return new JsonResponse($datas);
         }
+
+        return new JsonResponse($datas);
     }
 
     /**
