@@ -43,9 +43,10 @@ class ApiController extends AbstractController
                 $datas=array_slice($datas[0]['pokemon'],0, $_GET['page']);
             }
         }
+
         //Cas où la liste n'est pas filtrée
         else {
-            
+
             $ressources= $em->getRepository(Pokemon::class)->findAll();
 
             foreach ($ressources as $key => $ressource){
